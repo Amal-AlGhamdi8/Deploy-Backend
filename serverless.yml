@@ -1,0 +1,19 @@
+service: deploy-backend
+frameworkVersion: "3"
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+  stage: dev
+  timeout: 15
+  region: us-east-1
+  memorySize: 2048
+
+functions:
+  hello:
+    handler: handler.hello
+    events:
+      - http: ANY /{proxy+}
+      - http: ANY /
+    environment:
+      MONGODB_CONNECT_URI: mongodb+srv://amlalgamdi80:amlalgamdi80@cluster0.xsgtk7a.mongodb.net/awsDBS?retryWrites=true&w=majority
